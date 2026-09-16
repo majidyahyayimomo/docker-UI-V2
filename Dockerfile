@@ -18,19 +18,17 @@ RUN ARCH=$(uname -m) && \
 # تغییر نام فایل اجرایی اصلی به یک نام عمومی
 RUN mv /app/core-panel/x-ui /app/core-panel/core
 
-# ساخت پوشه اختصاصی برای دیتابیس
+# ساخت پوشه اختصاصی برای دیتابیس در مسیر امن
 RUN mkdir -p /app/core-panel/database
 
-# تنظیم مسیر دیتابیس از طریق متغیر محیطی پنل
-ENV XUI_DB_PATH="/app/core-panel/database/data.db"
+# تنظیم پورت دلخواه
+RUN ./core setting -port 48293
+EXPOSE 48293
 
 WORKDIR /app/core-panel
 
-# تنظیم پورت دلخواه (مثلاً 48293) در زمان بیلد/آماده‌سازی دیتابیس پیش‌فرض
-RUN ./core setting -port 48293
-
-# باز کردن همون پورت دلخواه در داکر
-EXPOSE 48293
+# ترفند نهایی: پاک کردن مسیر پیش‌فرض /etc/x-ui و اتصال آن به پوشه دلخواه خودمان با Symbolic Link
+RUN rm -rf /etc/x-ui && ln -s /app/core-panel/database /etc/x-ui
 
 # اجرای صحیح پنل
 CMD ["./core", "run"]
