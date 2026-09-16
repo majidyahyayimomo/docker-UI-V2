@@ -21,13 +21,16 @@ RUN mv /app/core-panel/x-ui /app/core-panel/core
 # ساخت پوشه اختصاصی برای دیتابیس
 RUN mkdir -p /app/core-panel/database
 
-# تنظیم مسیر دیتابیس از طریق متغیر محیطی پشتیبانی‌شده توسط پنل
+# تنظیم مسیر دیتابیس از طریق متغیر محیطی پنل
 ENV XUI_DB_PATH="/app/core-panel/database/data.db"
-
-# پورت پنل
-EXPOSE 48293
 
 WORKDIR /app/core-panel
 
-# اجرای دستور صحیح پنل (run) به همراه فایل اجرایی تغییر نام یافته
+# تنظیم پورت دلخواه (مثلاً 48293) در زمان بیلد/آماده‌سازی دیتابیس پیش‌فرض
+RUN ./core setting -port 48293
+
+# باز کردن همون پورت دلخواه در داکر
+EXPOSE 48293
+
+# اجرای صحیح پنل
 CMD ["./core", "run"]
