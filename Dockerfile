@@ -18,16 +18,19 @@ RUN ARCH=$(uname -m) && \
 # تغییر نام فایل اجرایی اصلی به یک نام عمومی
 RUN mv /app/core-panel/x-ui /app/core-panel/core
 
-# ساخت پوشه اختصاصی برای دیتابیس در مسیر امن
-RUN mkdir -p /app/core-panel/database
-
-# تنظیم پورت دلخواه
-RUN ./core setting -port 48293
-EXPOSE 48293
-
+# انتقال به پوشه پنل برای اجرای دستورات تنظیمات
 WORKDIR /app/core-panel
 
-# ترفند نهایی: پاک کردن مسیر پیش‌فرض /etc/x-ui و اتصال آن به پوشه دلخواه خودمان با Symbolic Link
+# ساخت پوشه اختصاصی برای دیتابیس در مسیر امن
+RUN mkdir -p database
+
+# تنظیم پورت دلخواه روی فایل اجرایی
+RUN ./core setting -port 48293
+
+# باز کردن پورت در داکر
+EXPOSE 48293
+
+# ترفند نهایی: پیوند دادن مسیر پیش‌فرض دیتابیس به پوشه امن خودمان
 RUN rm -rf /etc/x-ui && ln -s /app/core-panel/database /etc/x-ui
 
 # اجرای صحیح پنل
