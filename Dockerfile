@@ -5,7 +5,7 @@ RUN apk add --no-cache curl bash ca-certificates tzdata openssl
 ENV TZ=Asia/Tehran
 
 # تعیین پورت دلخواه از طریق متغیر محیطی پنل
-ENV XUI_PORT=48293
+ENV XUI_PORT=10252
 
 WORKDIR /app
 
