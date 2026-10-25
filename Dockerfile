@@ -5,7 +5,7 @@ RUN apk add --no-cache curl bash ca-certificates tzdata openssl
 ENV TZ=Asia/Tehran
 
 # تعیین پورت دلخواه از طریق متغیر محیطی پنل
-ENV XUI_PORT=10252
+ENV XUI_PORT=10253
 
 WORKDIR /app
 
@@ -27,7 +27,7 @@ RUN mkdir -p /app/core-panel/database
 WORKDIR /app/core-panel
 
 # باز کردن پورت جدید در داکر
-EXPOSE 10252
+EXPOSE 10253
 
 # پیوند دادن مسیر پیش‌فرض دیتابیس به پوشه امن خودمان
 RUN rm -rf /etc/x-ui && ln -s /app/core-panel/database /etc/x-ui
