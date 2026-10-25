@@ -27,7 +27,7 @@ RUN mkdir -p /app/core-panel/database
 WORKDIR /app/core-panel
 
 # باز کردن پورت جدید در داکر
-EXPOSE 48293
+EXPOSE 10252
 
 # پیوند دادن مسیر پیش‌فرض دیتابیس به پوشه امن خودمان
 RUN rm -rf /etc/x-ui && ln -s /app/core-panel/database /etc/x-ui
